@@ -18,12 +18,12 @@ class ThreatLibraryScreen extends StatelessWidget {
       padding: Spacing.pagePadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SectionHeader(
+        children: const [
+          SectionHeader(
             title: 'Threat Library',
             subtitle: 'Know the threats — in plain language, never fear',
           ),
-          const Expanded(
+          Expanded(
             child: EmptyState(
               title: 'The library is being stocked',
               message:
