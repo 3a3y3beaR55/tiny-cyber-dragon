@@ -40,8 +40,11 @@ class LessonCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.school_outlined,
-                  color: StatusColors.info, size: 20),
+              Icon(
+                Icons.school_outlined,
+                color: StatusColors.info,
+                size: 20,
+              ),
               Spacing.gapXs,
               Expanded(
                 child: Text(title, style: theme.textTheme.titleMedium),
@@ -64,7 +67,7 @@ class LessonCard extends StatelessWidget {
           ],
           Spacing.gapSm,
           if (started)
-            ProgressWidget(value: progress, color: StatusColors.info)
+            ProgressWidget(value: progress, color: StatusColors.info,)
           else
             Text(
               'Not started',
