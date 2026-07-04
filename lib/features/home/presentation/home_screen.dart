@@ -6,6 +6,7 @@ import '../../../app/router/app_router.dart';
 import '../../../core/theme/theme.dart';
 import '../../../shared/byte/byte.dart';
 import '../../../shared/widgets/widgets.dart';
+import '../../../dragon/dragon_animation.dart';
 
 /// HomeScreen — Dashboard v0.1.
 ///
@@ -31,6 +32,23 @@ class HomeScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Center(
+              child: DragonAnimation(
+                size: 180,
+                frames: const [
+                  'assets/byte/idle/byte_01.png',
+                  'assets/byte/idle/byte_02.png',
+                  'assets/byte/idle/byte_03.png',
+                  'assets/byte/idle/byte_04.png',
+                  'assets/byte/idle/byte_05.png',
+                  'assets/byte/idle/byte_06.png',
+                  'assets/byte/idle/byte_07.png',
+                  'assets/byte/idle/byte_08.png',
+                ],
+              ),
+            ),
+            Spacing.gapMd,
+
             // ── Byte status ─────────────────────────────────────────────
             ByteStatusCard(
               state: byte,
@@ -244,9 +262,8 @@ class _StatusChip extends StatelessWidget {
     final Color accent = status.data.accentColor;
 
     return Material(
-      color: selected
-          ? accent.withValues(alpha: 0.18)
-          : theme.colorScheme.surface,
+      color:
+          selected ? accent.withValues(alpha: 0.18) : theme.colorScheme.surface,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Spacing.radiusFull),
         side: BorderSide(
