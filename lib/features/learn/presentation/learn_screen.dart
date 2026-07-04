@@ -18,12 +18,12 @@ class LearnScreen extends StatelessWidget {
       padding: Spacing.pagePadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SectionHeader(
+        children: const [
+          SectionHeader(
             title: 'Learn',
             subtitle: 'Interactive lessons that build real-world safety skills',
           ),
-          const Expanded(
+          Expanded(
             child: EmptyState(
               title: 'Lessons are hatching',
               message:
