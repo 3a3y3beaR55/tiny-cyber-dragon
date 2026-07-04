@@ -18,12 +18,12 @@ class MissionsScreen extends StatelessWidget {
       padding: Spacing.pagePadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SectionHeader(
+        children: const [
+          SectionHeader(
             title: 'Missions',
             subtitle: 'Practice real scenarios with Byte at your side',
           ),
-          const Expanded(
+          Expanded(
             child: EmptyState(
               title: 'Missions are being planned',
               message:
