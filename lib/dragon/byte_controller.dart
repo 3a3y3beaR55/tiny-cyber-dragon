@@ -16,17 +16,17 @@ class ByteController extends ChangeNotifier {
 
   void idle() => setState(ByteAnimationState.idle);
 
-  void scanning() => setState(ByteAnimationState.scanning);
+  void scanning() => setState(ByteAnimationState.pulse);
 
-  void warning() => setState(ByteAnimationState.warning);
+  void warning() => setState(ByteAnimationState.pulse);
 
-  void threat() => setState(ByteAnimationState.threat);
+  void threat() => setState(ByteAnimationState.pulse);
 
-  void complete() => setState(ByteAnimationState.complete);
+  void complete() => setState(ByteAnimationState.pulse);
 
-  void learning() => setState(ByteAnimationState.learning);
+  void learning() => setState(ByteAnimationState.pulse);
 
-  void updating() => setState(ByteAnimationState.updating);
+  void updating() => setState(ByteAnimationState.pulse);
 
-  void sleeping() => setState(ByteAnimationState.sleeping);
+  void sleeping() => setState(ByteAnimationState.still);
 }

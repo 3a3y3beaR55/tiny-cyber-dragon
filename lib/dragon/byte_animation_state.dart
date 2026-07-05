@@ -1,10 +1,1 @@
-enum ByteAnimationState {
-  idle,
-  scanning,
-  warning,
-  threat,
-  complete,
-  learning,
-  updating,
-  sleeping,
-}
+export '../shared/byte/byte_enums.dart';

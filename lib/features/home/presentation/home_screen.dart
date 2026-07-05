@@ -8,6 +8,9 @@ import '../../../shared/byte/byte.dart';
 import '../../../shared/widgets/widgets.dart';
 import '../../../dragon/dragon_animation.dart';
 
+import '../../../dragon/byte_animation_frames.dart';
+import '../../../dragon/byte_controller_provider.dart';
+
 /// HomeScreen — Dashboard v0.1.
 ///
 /// The user's daily starting point: Byte's status, one actionable tip, and
@@ -23,6 +26,8 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ByteState byte = ref.watch(byteStatusProvider);
+    final ByteAnimationState animationState =
+        ref.watch(byteControllerProvider).state;
     final ThemeData theme = Theme.of(context);
 
     return SingleChildScrollView(
@@ -35,16 +40,7 @@ class HomeScreen extends ConsumerWidget {
             Center(
               child: DragonAnimation(
                 size: 180,
-                frames: const [
-                  'assets/byte/idle/byte_01.png',
-                  'assets/byte/idle/byte_02.png',
-                  'assets/byte/idle/byte_03.png',
-                  'assets/byte/idle/byte_04.png',
-                  'assets/byte/idle/byte_05.png',
-                  'assets/byte/idle/byte_06.png',
-                  'assets/byte/idle/byte_07.png',
-                  'assets/byte/idle/byte_08.png',
-                ],
+                frames: ByteAnimationFrames.frames[animationState]!,
               ),
             ),
             Spacing.gapMd,
