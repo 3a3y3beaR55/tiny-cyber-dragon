@@ -61,8 +61,37 @@ class HomeScreen extends ConsumerWidget {
             // real features drive statuses. Tracked as tech debt on purpose.
             _ByteStatusTestPanel(
               current: byte.status,
-              onSelect: (status) =>
-                  ref.read(byteStatusProvider.notifier).setStatus(status),
+              onSelect: (status) {
+                ref.read(byteStatusProvider.notifier).setStatus(status);
+
+                final controller = ref.read(byteControllerProvider);
+
+                switch (status) {
+                  case ByteStatus.idle:
+                    controller.idle();
+                    break;
+                  case ByteStatus.scanning:
+                    controller.scanning();
+                    break;
+                  case ByteStatus.warning:
+                  case ByteStatus.threat:
+                  case ByteStatus.critical:
+                    controller.warning();
+                    break;
+                  case ByteStatus.complete:
+                    controller.complete();
+                    break;
+                  case ByteStatus.learning:
+                    controller.learning();
+                    break;
+                  case ByteStatus.updating:
+                    controller.updating();
+                    break;
+                  case ByteStatus.sleeping:
+                    controller.sleeping();
+                    break;
+                }
+              },
             ),
             Spacing.gapMd,
 

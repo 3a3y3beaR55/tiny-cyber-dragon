@@ -19,38 +19,57 @@ class DragonAnimation extends StatefulWidget {
 }
 
 class _DragonAnimationState extends State<DragonAnimation> {
-  late Timer _timer;
+  Timer? _timer;
   int _frame = 0;
 
   @override
   void initState() {
     super.initState();
+    _startTimer();
+  }
+
+  @override
+  void didUpdateWidget(covariant DragonAnimation oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.frames != widget.frames ||
+        oldWidget.frameDuration != widget.frameDuration) {
+      _frame = 0;
+      _timer?.cancel();
+      _startTimer();
+    }
+  }
+
+  void _startTimer() {
+    if (widget.frames.length <= 1) return;
 
     _timer = Timer.periodic(widget.frameDuration, (_) {
-      if (!mounted) return;
+      if (!mounted || widget.frames.isEmpty) return;
 
       setState(() {
-        _frame++;
-        if (_frame >= widget.frames.length) {
-          _frame = 0;
-        }
+        _frame = (_frame + 1) % widget.frames.length;
       });
     });
   }
 
   @override
   void dispose() {
-    _timer.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.frames.isEmpty) {
+      return SizedBox.square(dimension: widget.size);
+    }
+
     return Image.asset(
       widget.frames[_frame],
       width: widget.size,
       height: widget.size,
       filterQuality: FilterQuality.high,
+      gaplessPlayback: true,
     );
   }
 }
