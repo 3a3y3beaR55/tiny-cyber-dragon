@@ -197,9 +197,14 @@ class HomeScreen extends ConsumerWidget {
   /// Placeholder scan action — real defensive scanning ships in a future
   /// sprint. Byte reacts so the interaction still feels alive.
   Future<void> _onScanPressed(BuildContext context, WidgetRef ref) async {
-    ref
-        .read(byteStatusProvider.notifier)
-        .setStatus(ByteStatus.scanning, message: 'Warming up my scanners…');
+    final controller = ref.read(byteControllerProvider);
+    controller.scanning();
+
+    ref.read(byteStatusProvider.notifier).setStatus(
+          ByteStatus.scanning,
+          message: 'Warming up my scanners…',
+        );
+
     await AppDialog.show(
       context,
       title: 'Safety Check — coming soon',
@@ -209,7 +214,9 @@ class HomeScreen extends ConsumerWidget {
       level: StatusLevel.info,
       confirmLabel: 'Got it',
     );
+
     ref.read(byteStatusProvider.notifier).relax();
+    controller.idle();
   }
 }
 
