@@ -3,12 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/providers/theme_mode_provider.dart';
 import '../core/theme/theme.dart';
+import '../dragon/byte_controller_provider.dart';
+import '../dragon/byte_overlay.dart';
 import 'router/app_router.dart';
 
 /// TinyCyberDragonApp — the root widget.
-///
-/// Responsibilities: wire theme + router. Nothing else lives here, so the
-/// root stays stable as the product grows.
 class TinyCyberDragonApp extends ConsumerWidget {
   const TinyCyberDragonApp({super.key});
 
@@ -23,6 +22,16 @@ class TinyCyberDragonApp extends ConsumerWidget {
       darkTheme: AppTheme.dark,
       themeMode: mode,
       routerConfig: appRouter,
+      builder: (context, child) {
+        final animationState = ref.watch(byteControllerProvider).state;
+
+        return Stack(
+          children: [
+            if (child != null) child,
+            ByteOverlay(state: animationState),
+          ],
+        );
+      },
     );
   }
 }
