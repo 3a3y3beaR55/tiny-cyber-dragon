@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'dragon_animation.dart';
 import 'byte_animation_frames.dart';
 import 'byte_animation_state.dart';
+import 'byte_position_provider.dart';
+import 'dragon_animation.dart';
 
-class ByteOverlay extends StatelessWidget {
+class ByteOverlay extends ConsumerWidget {
   final ByteAnimationState state;
 
   const ByteOverlay({
@@ -13,17 +15,25 @@ class ByteOverlay extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final position = ref.watch(bytePositionProvider);
+
+    final size = MediaQuery.of(context).size;
+
     return IgnorePointer(
-      child: Align(
-        alignment: Alignment.topCenter,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 28),
-          child: DragonAnimation(
-            size: 150,
-            frames: ByteAnimationFrames.frames[state]!,
+      child: Stack(
+        children: [
+          AnimatedPositioned(
+            duration: const Duration(milliseconds: 900),
+            curve: Curves.easeInOut,
+            left: (size.width * position.x) - 75,
+            top: size.height * position.y,
+            child: DragonAnimation(
+              size: 150,
+              frames: ByteAnimationFrames.frames[state]!,
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
