@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
+import '../../dragon/byte_position_provider.dart';
 import '../../core/theme/theme.dart';
 import '../../shared/byte/byte.dart';
 
@@ -36,11 +36,32 @@ class AppShell extends ConsumerWidget {
         children: [
           NavigationRail(
             selectedIndex: navigationShell.currentIndex,
-            onDestinationSelected: (index) => navigationShell.goBranch(
-              index,
-              // Re-selecting the current tab pops that branch to its root.
-              initialLocation: index == navigationShell.currentIndex,
-            ),
+            onDestinationSelected: (index) {
+              final bytePosition = ref.read(bytePositionProvider.notifier);
+
+              switch (index) {
+                case 0:
+                  bytePosition.home();
+                  break;
+                case 1:
+                  bytePosition.learn();
+                  break;
+                case 2:
+                  bytePosition.threats();
+                  break;
+                case 3:
+                  bytePosition.missions();
+                  break;
+                case 4:
+                  bytePosition.settings();
+                  break;
+              }
+
+              navigationShell.goBranch(
+                index,
+                initialLocation: index == navigationShell.currentIndex,
+              );
+            },
             labelType: NavigationRailLabelType.all,
             leading: Padding(
               padding: const EdgeInsets.symmetric(vertical: Spacing.md),
