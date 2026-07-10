@@ -41,6 +41,9 @@ class _DragonAnimationState extends State<DragonAnimation> {
   }
 
   void _startTimer() {
+    _timer?.cancel();
+    _timer = null;
+
     if (widget.frames.length <= 1) return;
 
     _timer = Timer.periodic(widget.frameDuration, (_) {
@@ -55,6 +58,7 @@ class _DragonAnimationState extends State<DragonAnimation> {
   @override
   void dispose() {
     _timer?.cancel();
+    _timer = null;
     super.dispose();
   }
 

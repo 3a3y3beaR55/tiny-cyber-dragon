@@ -17,23 +17,28 @@ class ByteOverlay extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final position = ref.watch(bytePositionProvider);
-
     final size = MediaQuery.of(context).size;
+    const dragonSize = 150.0;
 
-    return IgnorePointer(
-      child: Stack(
-        children: [
-          AnimatedPositioned(
-            duration: const Duration(milliseconds: 900),
-            curve: Curves.easeInOut,
-            left: (size.width * position.x) - 75,
-            top: size.height * position.y,
-            child: DragonAnimation(
-              size: 150,
-              frames: ByteAnimationFrames.frames[state]!,
+    return Positioned.fill(
+      child: IgnorePointer(
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 900),
+              curve: Curves.easeInOut,
+              left: (size.width * position.x) - (dragonSize / 2),
+              top: size.height * position.y,
+              width: dragonSize,
+              height: dragonSize,
+              child: DragonAnimation(
+                size: dragonSize,
+                frames: ByteAnimationFrames.frames[state]!,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
