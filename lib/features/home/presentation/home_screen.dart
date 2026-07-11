@@ -6,9 +6,6 @@ import '../../../app/router/app_router.dart';
 import '../../../core/theme/theme.dart';
 import '../../../shared/byte/byte.dart';
 import '../../../shared/widgets/widgets.dart';
-import '../../../dragon/dragon_animation.dart';
-
-import '../../../dragon/byte_animation_frames.dart';
 import '../../../dragon/byte_controller_provider.dart';
 
 /// HomeScreen — Dashboard v0.1.
@@ -37,14 +34,6 @@ class HomeScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: DragonAnimation(
-                size: 180,
-                frames: ByteAnimationFrames.frames[animationState]!,
-              ),
-            ),
-            Spacing.gapMd,
-
             // ── Byte status ─────────────────────────────────────────────
             ByteStatusCard(
               state: byte,
